@@ -7,7 +7,7 @@
   ],
    "functions": {
     "app/api/**/route.ts": {
-      "includeFiles": "node_modules/@sparticuz/chromium-min/bin/**"
+      "includeFiles": "node_modules/@sparticuz/chromium/bin/**"
     }
   }
 }
