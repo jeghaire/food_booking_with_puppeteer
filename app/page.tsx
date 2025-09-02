@@ -21,8 +21,12 @@ export default function AutomationButton() {
         return;
       }
       setResult(data.message || "Success");
-    } catch (err: any) {
-      setResult(`Error: ${err.message}`);
+    } catch (err) {
+      setResult(
+        `Error: ${
+          err instanceof Error ? err.message : "An unknown error occurred."
+        }`
+      );
       console.error(
         err instanceof Error ? err.message : "An unknown error occurred."
       );

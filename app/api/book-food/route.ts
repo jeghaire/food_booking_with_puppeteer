@@ -26,6 +26,7 @@ export async function GET() {
     const page = await browser.newPage();
 
     await page.setUserAgent(
+      // "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:117.0) Gecko/20100101 Firefox/117.0"
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
     );
 
@@ -89,9 +90,8 @@ export async function GET() {
     // Get all fieldsets on the page
     const fieldsets = await page.$$("fieldset");
     // Log all fieldset elements' outerHTML for inspection
-    for (const [i, fieldset] of fieldsets.entries()) {
-      const html = await fieldset.evaluate((el: Element) => el.outerHTML);
-      // console.log(`Fieldset[${i}]:`, html);
+    for (const [, fieldset] of fieldsets.entries()) {
+      await fieldset.evaluate((el: Element) => el.outerHTML);
       // Get legend text
       const legend: string = await fieldset.$eval(
         "legend",
@@ -138,7 +138,7 @@ export async function GET() {
         (el: Element) => el.textContent?.trim() || ""
       );
       console.log("Alert message:", alertMessage);
-    } catch (e) {
+    } catch {
       console.log("No alert message found after submit.");
     }
 
