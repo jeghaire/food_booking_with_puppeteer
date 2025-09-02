@@ -5,9 +5,9 @@
       "schedule": "30 16 * * *"
     }
   ],
-  "functions": {
-    "api/**/*.js": {
-      "includeFiles": "node_modules/@sparticuz/chromium/bin/**"
+   "functions": {
+    "app/api/**/route.ts": {
+      "includeFiles": "node_modules/@sparticuz/chromium-min/bin/**"
     }
   }
 }
