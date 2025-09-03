@@ -11,12 +11,14 @@ export async function GET() {
       };
 
     if (isVercel) {
-      const chromium = (await import("@sparticuz/chromium")).default;
+      const chromium = (await import("@sparticuz/chromium-min")).default;
       puppeteer = await import("puppeteer-core");
       launchOptions = {
         ...launchOptions,
         args: chromium.args,
-        executablePath: await chromium.executablePath(),
+        executablePath: await chromium.executablePath(
+          "https://github.com/Sparticuz/chromium/releases/download/v138.0.2/chromium-v138.0.2-pack.x64.tar"
+        ),
       };
     } else {
       puppeteer = await import("puppeteer");
@@ -29,6 +31,8 @@ export async function GET() {
       // "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:117.0) Gecko/20100101 Firefox/117.0"
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
     );
+
+    await page.setViewport({ width: 1920, height: 1080 });
 
     // Navigate to login page
     await page.goto(process.env.LOGIN_URL, {
